@@ -2,13 +2,14 @@
 
 NoAPI is a custom NLP library for you to parse document files into app-friendly data formats.
 
-**Example**
+## Example Usage
 You want to make an annual pie chart and line chart of spending by categories.
 
 Easiest solution: Make an Excel spreadsheet, then use their chart maker!
 
 Problem: This is what your bank statement PDF looks like 👇
 
+```
 ACCOUNT SUMMARY
 
 DATE | TO WHOM | DETAILS | OUTFLOW | INFLOW | BALANCE
@@ -19,7 +20,7 @@ e.g.,
            | JEFF | For Dinner | 0.00 | 25.00 | 725.00
 
 ... PARAGRAPHS OF TEXT ...
-
+```
 You can obviously manually translate the document into an excel file, but imagine deciding which invoice belongs to which category for hundreds to thousands of transactions.
 
 The better solution is to designate categories for your dataframe
@@ -91,8 +92,8 @@ and have your LLM of choice allocate each invoice to each category! Ideally, it 
 (For privacy reasons, I prefer Ollama because I want my data to be processed locally)
 
 Imagine the Excel Output:
-Sheet 1: Each individual row allocated to their respective category
-Sheet 2: Statistical calculations you want to perform e.g., sum, mean, stdev, projections
+- Sheet 1: Each individual row allocated to their respective category
+- Sheet 2: Statistical calculations you want to perform e.g., sum, mean, stdev, projections
 
 Sheet 1 will tell you whether your data is messed up.
 Sheet 2 is what you use to perform data visualisation for your user 🎉
@@ -129,7 +130,7 @@ Right now working on bank statement parser. If you want to help me:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/[yourusername]/NoAPI
+git clone https://github.com/{yourusername}/NoAPI
 cd NoAPI
 ```
 
