@@ -116,7 +116,7 @@ List TBD
 ## Prerequisites
 
 - Python 3.7+
-- pip or another Python package manager like uv
+- uv package manager (use `uv pip install` to install dependencies)
 
 ## Dependencies
 
@@ -136,8 +136,7 @@ cd NoAPI
 
 2. Install dependencies:
 ```bash
-pip install -r requirements.txt
-pip install pdfplumber pandas typing
+uv pip install pdfplumber pandas typing
 ```
 
 ## Next Steps

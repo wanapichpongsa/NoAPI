@@ -1,0 +1,10 @@
+[project]
+name = "noapi"
+version = "0.1.0"
+description = "custom NLP library for you to parse document files into app-friendly data formats"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "llmsherpa>=0.1.4",
+    "pandas>=2.2.3",
+]

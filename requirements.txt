@@ -1,5 +1,0 @@
-### python -c "import pandas as pd; print(pd.__version__)"
-pandas==2.2.3
-
-### python -c "import pdfplumber; print(pdfplumber.__version__)"
-pdfplumber=0.11.5
