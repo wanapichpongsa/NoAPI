@@ -108,7 +108,7 @@ LLM Error Handling:
 
 That's it for my rant. Enjoy, and please give me feedback!
 
-**Disclaimer** Project beta version is under development. Open to changing name if it is a bad fit.
+**Disclaimer:** Project beta version is under development. Open to changing name if it is a bad fit.
 
 ## Features
 List TBD
@@ -139,6 +139,11 @@ cd NoAPI
 pip install -r requirements.txt
 pip install pdfplumber pandas typing
 ```
+
+## Next Steps
+
+1. Maybe fork this [repo](https://github.com/nlmatics/llmsherpa)
+
 
 ## Contributing
 
