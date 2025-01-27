@@ -3,6 +3,9 @@
 NoAPI is a custom NLP library for you to parse document files into app-friendly data formats.
 
 ## Example Usage
+
+**The following example was the fintech-related problem I faced. This project is not finance specific and can be used for general ETL tasks.**
+
 You want to make an annual pie chart and line chart of spending by categories.
 
 Easiest solution: Make an Excel spreadsheet, then use their chart maker!
@@ -123,6 +126,7 @@ List TBD
 - pdfplumber
 - pandas
 - typing
+- llmsherpa
 
 ## Installation
 
@@ -134,14 +138,19 @@ git clone https://github.com/{yourusername}/NoAPI
 cd NoAPI
 ```
 
-2. Install dependencies:
+2. Setup and activate virtual environement
+First, follow ultraviolet ssh installation instructions: https://github.com/astral-sh/uv
 ```bash
-uv pip install pdfplumber pandas typing
+uv init
+source .venv/bin/activate # On Unix/MacOS
+# or
+.venv/Scripts/activate # On Windows
 ```
 
-## Next Steps
-
-1. Maybe fork this [repo](https://github.com/nlmatics/llmsherpa)
+3. Install dependencies:
+```bash
+uv pip install pdfplumber pandas typing llmsherpa
+```
 
 
 ## Contributing
