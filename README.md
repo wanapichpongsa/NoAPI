@@ -116,17 +116,13 @@ That's it for my rant. Enjoy, and please give me feedback!
 ## Features
 List TBD
 
-## Prerequisites
-
-- Python 3.7+
-- uv package manager (use `uv pip install` to install dependencies)
-
 ## Dependencies
 
-- pdfplumber
-- pandas
-- typing
-- llmsherpa
+- streamlit: Python scripts into shareable app in seconds
+- pandas: Data analysis equation functions and structure
+- ollama: Deepseek R1 local model
+- plotly: HTML exportable data visualisation
+
 
 ## Installation
 
@@ -136,20 +132,6 @@ Right now working on bank statement parser. If you want to help me:
 ```bash
 git clone https://github.com/{yourusername}/NoAPI
 cd NoAPI
-```
-
-2. Setup and activate virtual environement
-First, follow ultraviolet ssh installation instructions: https://github.com/astral-sh/uv
-```bash
-uv init
-source .venv/bin/activate # On Unix/MacOS
-# or
-.venv/Scripts/activate # On Windows
-```
-
-3. Install dependencies:
-```bash
-uv pip install pdfplumber pandas typing llmsherpa
 ```
 
 

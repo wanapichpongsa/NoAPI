@@ -1,7 +1,8 @@
 # TODO:
 - [✔️] Visualise Sheet 1 and Sheet 2 output formats on Excel
-- [ ] Setup juptyer venv
-- Pytorch || Tensorflow for Ollama API / Hugging Face API
+- [✔️] Setup juptyer venv
+- [✔️] (Ollama has own client) Pytorch || Tensorflow for Ollama API / Hugging Face API
 - [ ] Setup Deepseek R1 Ollama local model & Role (e.g., designate role + explain thought process when processing data)
 - [ ] Run tests with bank statement documents -> Check if memory really is local in this repository (.gitignore)
 - [ ] Visualise Sheet 2 data with matplotlib via JSON structure
+- [ ] Simpler, marketable headline for README (no techy buzzwords, more desires)
