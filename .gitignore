@@ -1,6 +1,8 @@
 .venv
 *env
 
-*.csv
-
 __pycache__
+
+# Ignore personal data files
+spending/*.xlsx
+spending/*.db
