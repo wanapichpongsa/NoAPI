@@ -120,8 +120,13 @@ List TBD
 
 - streamlit: Python scripts into shareable app in seconds
 - pandas: Data analysis equation functions and structure
+- openpyxl: Works with pandas to export to excel workbooks
 - ollama: Deepseek R1 local model
 - plotly: HTML exportable data visualisation
+- pdfplumber: PDF parsing
+- python-docx: Word and XML parsing
+
+**Note** PyPDF2 can't handle complex pdf tasks.
 
 
 ## Installation
