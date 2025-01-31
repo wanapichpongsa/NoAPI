@@ -139,6 +139,11 @@ git clone https://github.com/{yourusername}/NoAPI
 cd NoAPI
 ```
 
+2. Pull LLM via Ollama:
+```bash
+ollama pull deepseek-r1:8b
+```
+
 
 ## Contributing
 

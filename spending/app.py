@@ -26,13 +26,14 @@ def process_with_llm(text):
     
     try:
         # system is overall behaviour, user is specific messages.
-        response = llm.chat(model="deepseek-coder:1.3b", messages=[
+        # see existing models: https://ollama.com/library/deepseek-r1
+        response = llm.chat(model="deepseek-r1:8b", messages=[
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": f"Process this bank statement:\n{text}"}
         ])
         return response["message"]["content"]
     except Exception as e:
-        return f"Error processing text: {str(e)}"
+        raise e
     
 def read_file(uploaded_file):
     # Warning: Not typesafe

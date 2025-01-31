@@ -6,3 +6,4 @@ __pycache__
 # Ignore personal data files
 spending/*.xlsx
 spending/*.db
+documentation/deepseek-r1
