@@ -2,6 +2,52 @@
 - [✔️] Visualise Sheet 1 and Sheet 2 output formats on Excel
 - [✔️] Setup juptyer venv
 - [✔️] (Ollama has own client) Pytorch || Tensorflow for Ollama API / Hugging Face API
+
+**Debug Triage**
+- [ ] Modularise data frames: Sheet 1 & Sheet 2
+  - [ ] sheet_1_df {
+    title: str
+    category_i: {
+      name: str
+      subcategory_i: {
+        name: str
+        invoice_i: {
+          id: int
+          date: datetime.date
+          outflow: float
+          inflow: float
+        }
+        total_out: sum(for invoice_i['outflow'] in sheet_1_df)
+        total_in: sum(for invoice_i['inflow'] in sheet_1_df)
+        total_net: total_in - total_out
+        }
+      total_out: sum(for subcategory_i['total']['outflow'] in sheet_1_df)
+      total_in: sum(for subcategory_i['total']['inflow'] in sheet_1_df)
+      total_net: total_in - total_out
+      }
+      total_out: sum(for category_i['total']['outflow'] in sheet_1_df)
+      total_in: sum(for category_i['total']['inflow'] in sheet_1_df)
+      total_net: total_in - total_out
+    }
+
+  - [ ] sheet_2_df {
+      title: str = sheet_1_df['title']
+      sheet_1_df[category_i]: {
+          sheet_1_df[category_i][subcategory_i]: {
+              sheet_1_df[category_i][subcategory_i][invoice_i]['total_out']: float
+              sheet_1_df[category_i][subcategory_i][invoice_i]['total_in']: float
+              sheet_1_df[category_i][subcategory_i][invoice_i]['total_net']: float
+        }
+        total_out: sum(for subcategory_i['total_out'] in sheet_2_df[category_i])
+        total_in: sum(for subcategory_i['total_in'] in sheet_2_df[category_i])
+        total_net: total_in - total_out
+      }
+      total_out: sum(for category_i['total_out'] in sheet_2_df)
+      total_in: sum(for category_i['total_in'] in sheet_2_df)
+      total_net: total_in - total_out
+    }
+
+
 - [ ] Setup Deepseek R1 Ollama local model & Role (e.g., designate role + explain thought process when processing data)
 - [ ] Run tests with bank statement documents -> Check if memory really is local in this repository (.gitignore)
 - [ ] Visualise Sheet 2 data with matplotlib via JSON structure

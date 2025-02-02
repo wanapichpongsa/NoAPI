@@ -4,7 +4,7 @@ NoAPI is a custom NLP library for you to parse document files into app-friendly 
 
 ## Example Usage
 
-**The following example was the fintech-related problem I faced. This project is not finance specific and can be used for general ETL tasks.**
+**The following example was the fintech-related problem I faced. This project is not finance specific and can be used for general ELT tasks.**
 
 You want to make an annual pie chart and line chart of spending by categories.
 
@@ -142,6 +142,8 @@ cd NoAPI
 2. Pull LLM via Ollama:
 ```bash
 ollama pull deepseek-r1:8b
+# List to double check model is installed
+ollama list
 ```
 
 
@@ -158,3 +160,6 @@ This means that any modified versions of this software must also be made availab
 ## Acknowledgments
 
 - @arsenstorm for debugging assistance and regex pattern optimization
+
+**No Code Alternatives?**
+- [Airbyte](https://airbyte.com/): Multi ELT API Cloud Environment
