@@ -7,33 +7,7 @@ import pdfplumber
 import docx
 import sqlite3
 import logging
-llm = ollama.Client()
-def process_with_llm(text):
-    system_prompt = """You are a financial data analyst. Your tasks:
-    1. Extract transaction data from bank statement documents (e.g., txt, pdf, csv, xml, word) common columns are: date, details, outflow, inflow, balance.
-    2. Categorize transactions into hierarchical groups:
-        - essentials: {groceries, utilities, rent}
-        - transport: {fuel, public_transport, car_maintenance}
-        - leisure: {dining, entertainment, shopping}
-    3. Very concisely explain your categorization logic
-    4. Return data in JSON format:
-        {
-            "transactions": [...],
-            "categories": {...},
-            "reasoning": "..."
-        }
-    """
-    
-    try:
-        # system is overall behaviour, user is specific messages.
-        # see existing models: https://ollama.com/library/deepseek-r1
-        response = llm.chat(model="deepseek-r1:8b", messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"Process this bank statement:\n{text}"}
-        ])
-        return response["message"]["content"]
-    except Exception as e:
-        raise e
+import json
     
 def read_file(uploaded_file):
     # Warning: Not typesafe
@@ -45,61 +19,62 @@ def read_file(uploaded_file):
         return " ".join(paragraph.text for paragraph in doc.paragraphs)
     else:
         return uploaded_file.getvalue().decode()
-    
+
 def main():
     st.title("now.tech")
-    uploaded_file = st.file_uploader("Upload document (txt, csv, docx, pdf)", 
-                                   type=["txt", "csv", "docx", "pdf"],
-                                   accept_multiple_files=False)
-    if uploaded_file:
-        text = read_file(uploaded_file)
-        # get filename to determine table name
-        filename = uploaded_file.name
-        filename = filename.split('.')[0]
-        tablename = None
-        import re
-        month_year_pattern = re.compile(r'[a-zA-Z]{3,4} \d{2,4}')
-        find_pattern = month_year_pattern.search(filename)
-        if find_pattern:
-            tablename = "_".join(find_pattern.group(0).split(" "))
-        else:
-            tablename = "_".join(filename.split(" "))
-            
+    # Add custom CSS to resize file uploader
+    st.markdown("""
+        <style>
+        .stFileUploader div[data-testid="stFileUploadDropzone"] {
+            min-height: 100px;
+            max-height: 100px;
+            padding: 10px;
+        }
+        </style>
+    """, unsafe_allow_html=True)
 
-        with st.spinner("Processing..."):
-            analysis = process_with_llm(text)
-            st.write('### LLM Analysis')
-            st.write(analysis)
+    st.markdown("""
+    **NOTICE:** It is recommended to name your file in the format of 'Month(3-4 characters) Year(4 digits).pdf' e.g., 'Jan 2025.pdf'
+    """)
 
-        # save to local database
-        model = 'deepseek-coder:1.3b'
-        conn = sqlite3.connect('processed_data.db')
-        df = pd.DataFrame({
-            'original_text': [text],
-            f'{model}_output': [analysis],
-            'filename': [uploaded_file.name]
-        })
-        df.to_sql(tablename, conn, if_exists='append', index=False)
-        st.success("Data saved to database")
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
 
-        # display data
-        st.write("### Processed Data")
-        st.dataframe(pd.read_sql_query(f"SELECT * FROM {tablename}", conn)) # quote table name if you want spaces.
+    # Display chat history
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+    
+    # File uploader and chat input in columns
+    col1, col2 = st.columns([3, 1])
+    # Chat input
+    model = 'deepseek-r1:8b'
+    document_text = None
+    with col2:
+        uploaded_file = st.file_uploader("Upload a file", type=["txt", "csv", "docx", "pdf"])
+        if uploaded_file:
+            document_text = read_file(uploaded_file)
 
-        # Export to excel (hope API downloads, and configures to 2 sheets)
-        df.to_excel(f"{tablename}.xlsx", index=False)
+    with col1:
+        if prompt := st.chat_input("What ELT process would you like for me to perform?"):
+            if not document_text:
+                st.session_state.messages.append({"role": "user", "content": prompt})
+            else:
+                st.session_state.messages.append({"role": "user", "content": prompt + "\n" + document_text})
 
-        # Visualise data
-        # fig_inflow = px.pie(df, values='inflow', names='category', title='Spending by Category')
-        # fig_outflow = px.pie(df, values='outflow', names='category', title='Spending by Category')
-        # st.plotly_chart(fig_inflow)
-        # st.plotly_chart(fig_outflow)
+            with st.chat_message("user"):
+                if not document_text:
+                    st.markdown(prompt)
+                else:
+                    st.markdown(prompt + "\n" + document_text)
+                
 
-        # Append additional data
-        st.write("### Append additional data")
-        additional_data = st.file_uploader("Upload additional data", type=["csv", "xlsx", "txt", "docx", "pdf"])
-        if additional_data:
-            logging.warning('We\'re not ready to append data yet')
+            with st.chat_message("assistant"):
+                llm = ollama.Client()
+                response = llm.chat(model=model, messages=st.session_state.messages)
+                st.markdown(response["message"]["content"])
+
+            st.session_state.messages.append({"role": "assistant", "content": response["message"]["content"]})
 
 if __name__ == "__main__":
     main()

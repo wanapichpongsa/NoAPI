@@ -146,6 +146,18 @@ ollama pull deepseek-r1:8b
 ollama list
 ```
 
+3. Setup venv and install dependencies:
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+pip install streamlit pandas ollama plotly pdfplumber python-docx openpyxl
+```
+
+4. Run the app:
+```bash
+streamlit run spending/app.py
+```
 
 ## Contributing
 
