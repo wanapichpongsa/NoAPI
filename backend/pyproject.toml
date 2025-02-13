@@ -1,0 +1,10 @@
+[project]
+name = "noapi"
+version = "0.1.0"
+description = "Automate ELT with AI Agent"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "crawl4ai>=0.4.248",
+    "pdfplumber>=0.11.5",
+]
