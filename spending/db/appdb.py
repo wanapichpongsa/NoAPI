@@ -17,7 +17,7 @@ class AppDatabase:
           cursor.execute('''
               CREATE TABLE IF NOT EXISTS requests (
                   request_index INTEGER PRIMARY KEY AUTOINCREMENT,
-                  day DATE NOT NULL DEFAULT CURRENT_DATE,
+                  day DATE DEFAULT CURRENT_DATE,
                   day_index INTEGER,
                   month TEXT NOT NULL,
                   year INTEGER NOT NULL,
@@ -38,4 +38,6 @@ class AppDatabase:
                   FOREIGN KEY (request_index) REFERENCES requests(request_index)
               )
           ''')
+        # TIMESTAMP() instead of UUID?
+          
           conn.commit()
