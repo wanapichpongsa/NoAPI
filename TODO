@@ -2,6 +2,10 @@
 - [✔️] Visualise Sheet 1 and Sheet 2 output formats on Excel
 - [✔️] Setup juptyer venv
 - [✔️] (Ollama has own client) Pytorch || Tensorflow for Ollama API / Hugging Face API
+- [✔️] Setup user authentication
+- [ ] Parse document based off [RAG](https://github.com/unclecode/crawl4ai)
+
+
 
 **Debug Triage**
 - [ ] Modularise data frames: Sheet 1 & Sheet 2
@@ -52,3 +56,8 @@
 - [ ] Run tests with bank statement documents -> Check if memory really is local in this repository (.gitignore)
 - [ ] Visualise Sheet 2 data with matplotlib via JSON structure
 - [ ] Simpler, marketable headline for README (no techy buzzwords, more desires)
+- [ ] GUI to manipulate personal data structure
+
+
+**Stage 2**
+- [ ] Change the ugly ass UI
