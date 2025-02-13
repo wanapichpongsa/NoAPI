@@ -9,3 +9,6 @@ __pycache__
 spending/*.xlsx
 spending/*.db
 documentation/deepseek-r1
+
+# open-webui
+.webui_secret_key
