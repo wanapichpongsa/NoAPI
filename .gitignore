@@ -1,14 +1,9 @@
 .venv
-*env
-
-__pycache__
+.env
 
 .DS_Store
 
-# Ignore personal data files
-spending/*.xlsx
-spending/*.db
-documentation/deepseek-r1
+node_modules
 
-# open-webui
-.webui_secret_key
+# rust stuff
+target
