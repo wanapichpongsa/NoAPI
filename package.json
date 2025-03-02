@@ -1,0 +1,20 @@
+{
+  "name": "now.tech",
+  "version": "0.0.1",
+  "description": "",
+  "private": false,
+  "scripts": {
+    "dev": "turbo dev",
+    "launch": "cd platform && bun run dev",
+    "format": "cargo fmt --all",
+    "lint": "cargo clippy",
+    "tailwind": "turbo tailwind"
+  },
+  "devDependencies": {
+    "turbo": "^2.4.1"
+  },
+  "packageManager": "bun@1.2.1",
+  "workspaces": [
+    "platform"
+  ]
+}

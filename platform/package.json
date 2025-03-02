@@ -1,0 +1,16 @@
+{
+  "name": "now-platform",
+  "scripts": {
+    "tailwind": "bunx @tailwindcss/cli -i ./input.css -o ./assets/tailwind.css --watch --minify",
+    "dev": "bun dev:desktop",
+    "dev:web": "dx serve --platform web",
+    "dev:ios": "dx serve --platform ios",
+    "dev:android": "dx serve --platform android",
+    "dev:desktop": "dx serve --platform desktop",
+    "dev:server": "dx serve --platform server"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.0.3",
+    "tailwindcss": "^4.0.3"
+  }
+}

@@ -1,9 +1,10 @@
-use crate::components::{Echo, Hero};
 use dioxus::prelude::*;
 
 #[component]
 pub fn Home() -> Element {
     rsx! {
-        Echo {}
+        div {
+            h1 { "Hello, World!" }
+        }
     }
 }

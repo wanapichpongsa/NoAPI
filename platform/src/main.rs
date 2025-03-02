@@ -29,7 +29,7 @@ fn App() -> Element {
     rsx! {
         // Global app resources
         document::Link { rel: "icon", href: FAVICON }
-        document::Link { href: TAILWIND_CSS }
+        document::Stylesheet { href: TAILWIND_CSS }
 
         Router::<Route> {}
     }
