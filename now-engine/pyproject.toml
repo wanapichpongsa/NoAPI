@@ -1,0 +1,9 @@
+[project]
+name = "now-engine"
+version = "0.1.0"
+description = "multimodal RAG agent"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pymupdf>=1.25.3",
+]
