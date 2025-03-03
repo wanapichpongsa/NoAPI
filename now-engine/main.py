@@ -22,9 +22,21 @@ def main():
 
     from agent import ConversationalAgent
     agent = ConversationalAgent()
-    agent.conversation(pages[0])
+    first_prompt = "Output the first and last line of the invoice table in this bank statement document and explain why you chose them:"
+    agent.conversation(first_prompt, pages[0])
     while True:
-      agent.conversation()
+      user_input = input("You: ")
+      if user_input == "exit":
+        break
+      agent.conversation(user_input)
+      if user_input == "new agent":
+        last_context = agent.get_latest_response()
+        agent = ConversationalAgent()  # Replace the old agent
+        user_input = input("You: ")
+        if user_input == "exit":
+          break
+        agent.conversation(user_input, last_context)
+
   finally:
     end_time = time.time()
     logging.info(f"Time taken: {end_time - start_time} seconds")

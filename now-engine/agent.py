@@ -10,8 +10,7 @@ class ConversationalAgent:
   def system_prompt(self, system_prompt: str):
     self.messages.append({"role": "system", "content": system_prompt})
 
-  def conversation(self, attachment: str = None):
-    user_query = input("You: ")
+  def conversation(self, user_query: str, attachment: str = None):
     if attachment:
       user_query += f"\nAttachment: {attachment}"
     self.messages.append({"role": "user", "content": user_query})
@@ -21,7 +20,7 @@ class ConversationalAgent:
     response = self.client.chat(model=self.model, messages=self.messages)
     self.messages.append({"role": "assistant", "content": response.message.content})
       
-    print(f"Agent: {response.message.content}")
+    print(f"Agent: {response.message.content}\n")
 
   # When GUI, can do this for any message in conversation.
   def get_latest_response(self):
