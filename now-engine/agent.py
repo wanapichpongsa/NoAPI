@@ -1,9 +1,9 @@
 import ollama
 
 class ConversationalAgent:
-  def __init__(self):
+  def __init__(self, model: str = "llama3.2:latest"):
     self.client = ollama.Client()
-    self.model = "llama3.2:latest"
+    self.model = model # Try deepseekr-1 later.
     self.messages = []
 
   # to give ST memory within a conversation, we have input previous messages.
@@ -22,3 +22,7 @@ class ConversationalAgent:
     self.messages.append({"role": "assistant", "content": response.message.content})
       
     print(f"Agent: {response.message.content}")
+
+  # When GUI, can do this for any message in conversation.
+  def get_latest_response(self):
+    return self.messages[-1]["content"]

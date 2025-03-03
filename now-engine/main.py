@@ -1,7 +1,5 @@
 import pdfplumber
 import os
-import json
-from sentence_transformers import SentenceTransformer
 import time
 import logging
 
@@ -13,29 +11,6 @@ def get_pdf_pages(path: str) -> list:
     for page in pdf.pages:
       pages.append(page.extract_text())
   return pages
-
-def create_embeddings(pages: list) -> list:
-  model = SentenceTransformer('all-MiniLM-L6-v2')
-  logging.info("Creating embeddings...")
-  embeddings = model.encode(pages)
-  return embeddings
-
-# TODO: GET MOST LIKELY PAGE -> LINES
-
-def ollama_extract_table(page: str) -> json:
-    logging.info("Fetching Ollama response...")
-    client = ollama.Client()
-    response = client.chat(
-        model="llama3.2:latest",
-        messages=[{
-            "role": "user",
-            "content": f"Extract the invoice tables from this text as JSON. Focus on numerical data and columnar patterns:\n{page}"
-        }],
-        format="json"
-    )
-    message = response.message.content
-    return json.dumps(json.loads(message, strict=False), indent=4)
-
 
 def main():
   try:
