@@ -10,6 +10,12 @@
 2. Recursively do so for every edge case until done!
 
 ### Iteration 2
+Notice:
+Cleaning works but needs significant Human Feedback.
+e.g.,
+```
+first line wrong–should be columns: "date, payment type and details, paid in, paid out, balance"
+```
 1. Recursive RAGs are cleaner
 2. Still facing a lot of query misintrepretation from the agent.
 3. LLM does not understand tabular logic from text:
