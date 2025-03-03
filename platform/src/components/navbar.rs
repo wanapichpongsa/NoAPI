@@ -7,13 +7,10 @@ pub fn Navbar() -> Element {
 
         div {
             id: "navbar",
+            class: "flex justify-between items-center p-4",
             Link {
                 to: Route::Home {},
                 "Home"
-            }
-            Link {
-                to: Route::Blog { id: 1 },
-                "Blog"
             }
         }
 
