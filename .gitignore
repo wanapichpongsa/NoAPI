@@ -12,6 +12,18 @@ target
 .turbo
 
 # personal data
+# ignore sensitive files then .gitkeep to track empty dirs on github (doesn't commit by default)
+# 1. ignore everything in documents
 database/documents/*
+# 2. since empty, .gitkeep to preserve
+!database/documents/.gitkeep
+# 3. preserve subdirectories
+!database/documents/*/
+# 4. ignore everything in subdirectories
+database/documents/*/*
+# 5. since empty, .gitkeep to preserve
+!database/documents/*/.gitkeep
+
+# Keep conversations directory structure but ignore contents
 database/conversations/*
 
