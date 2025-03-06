@@ -37,6 +37,13 @@ def drop_tables():
           DROP TABLE IF EXISTS table_format_edge_cases;
           DROP TABLE IF EXISTS table_formats;
           DROP TABLE IF EXISTS documents;
+                  
+          
+          DROP TABLE IF EXISTS conversation_messages;
+          DROP TABLE IF EXISTS conversations;
+          DROP TABLE IF EXISTS models;
+                  
+          DROP TABLE IF EXISTS document_categories;
       """)
       conn.commit()
       logging.info("Tables dropped successfully")
@@ -49,10 +56,9 @@ def init_extensions():
     logging.info("UUID extension created successfully")
 
 def init_dataformats_tables():
-  """Initialize database tables if they don't exist"""
+  """Initialize tables if they don't exist"""
   with get_db_connection() as conn:
     cur = conn.cursor()
-    # Create documents table
     cur.execute("""
       CREATE TABLE IF NOT EXISTS document_categories (
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -80,17 +86,11 @@ def init_dataformats_tables():
         document_category VARCHAR(255) NOT NULL,
         column_name VARCHAR(255) NOT NULL,
         column_type VARCHAR(50) NOT NULL,
-        example_value VARCHAR(255) NOT NULL,
+        default_value VARCHAR(255) NOT NULL,
+        edge_case VARCHAR(255) NOT NULL,
+        edge_case_response VARCHAR(255) NOT NULL,       
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (document_category) REFERENCES document_categories(name)
-      );
-      """)
-    cur.execute("""
-      CREATE TABLE IF NOT EXISTS table_format_edge_cases(
-        table_id UUID PRIMARY KEY,
-        edge_case VARCHAR(255) NOT NULL,
-        edge_case_response VARCHAR(255) NOT NULL,
-        FOREIGN KEY (table_id) REFERENCES table_formats(id)
       );
       """)
     
@@ -146,10 +146,11 @@ def show_documents_table():
 def init_conversations_tables():
   with get_db_connection() as conn:
     cur = conn.cursor()
+    # Using UUID PK gives freedom to change name and also allow multiple language versions under 1 id.
     cur.execute("""
         CREATE TABLE IF NOT EXISTS models (
           id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-          name VARCHAR(255) NOT NULL,
+          name VARCHAR(255) NOT NULL UNIQUE,
           type VARCHAR(255) NOT NULL        
         );
     """)
