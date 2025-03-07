@@ -23,6 +23,7 @@ def run_agent(prompt: str = None, attachment: str = None) -> None:
         elif user_input == "new agent":
           last_context = agent.get_latest_response()
           run_agent(None, last_context) # RECURSION
+
         agent.conversation(user_input, attachment) # no recursion since need same agent instance
       else:
         agent.conversation(prompt, attachment)

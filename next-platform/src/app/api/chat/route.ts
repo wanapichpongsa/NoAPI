@@ -20,7 +20,7 @@ export async function POST(req: Request) {
   } catch (error) {
     return NextResponse.json(
       { success: false, error: 'Error in chat API: ' + error }, 
-      { status: 500 }
+      { status: 500 } // perhaps be proxy for python message as 500 means absolute failure?
     );
   }
 }
