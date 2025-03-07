@@ -26,10 +26,9 @@ class ConversationalAgent:
     self.messages.append({"role": "user", "content": user_query})
     
     # ChatGPT and Claude are never the same instances by the way. They basically operate as RAGs.
-    # TODO: Only use entire chat history when referred to it...
     response = self.client.chat(model=self.model, messages=self.messages)
     self.messages.append({"role": "assistant", "content": response.message.content})
-
+    # TODO: Save to DB
     with open(self.file_path, "a") as f:
       f.write(f"You: {user_query}\nAgent: {response.message.content}\n")
 
