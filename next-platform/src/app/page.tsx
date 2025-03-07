@@ -1,9 +1,9 @@
-
+import { ChatInput } from "@/components/ChatInput";
 
 export default function Home() {
   return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
+    <main className="flex flex-col h-screen items-center relative bg-zinc-700">
+      <ChatInput />
+    </main>
   );
 }
